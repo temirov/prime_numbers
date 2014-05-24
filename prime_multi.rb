@@ -1,21 +1,16 @@
 class PrimeMulti
   class << self
-    def list total
+    def list total, first_prime: 2
       raise ArgumentError unless total.is_a? Integer
       primes = []
-      first_prime = 2
       possible_prime = first_prime
-      count = 1
-      while count <= total
+      while primes.count < total
         j = first_prime
         while j <= possible_prime
-          break if possible_prime % j == 0
+          break if (possible_prime % j).zero?
           j += 1
         end
-        if j == possible_prime
-          primes << possible_prime 
-          count += 1
-        end
+        primes << possible_prime if j == possible_prime
         possible_prime += 1
       end
       primes
