@@ -19,7 +19,7 @@ describe PrimeMulti do
     it 'returns a list of prime numbers using optimized method' do
       expect(PrimeMulti.list(10, method: :optimized)).to eq(Prime.first(10))
     end
-    it 'returns a list of prime numbers using optimized method' do
+    it 'returns a list of prime numbers using native method' do
       expect(PrimeMulti.list(10, method: :native)).to eq(Prime.first(10))
     end
   end
@@ -63,5 +63,4 @@ describe PrimeMulti do
       expect(@output).to eq(@table)
     end
   end
-
 end
