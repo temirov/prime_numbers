@@ -31,5 +31,5 @@ class CommandLine
 end
 
 options = CommandLine.parse(ARGV)
-puts "Printing multiplication table for first #{options.total} prime numbers"
+puts "Printing multiplication table for the first #{options.total} prime numbers"
 PrimeMulti.table options.total

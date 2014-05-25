@@ -1,45 +1,32 @@
 require 'benchmark'
-require_relative '../linked_list'
+require_relative '../prime_multi'
 
 Benchmark.bm do |r| 
-  a = [] 
-  l = nil
-
-  r.report "Insert into Array" do
+  r.report "Find prime numbers using native Prime class" do
     100000.times do
       i = +1 
-      a.insert 0,i 
+      PrimeMulti.list i, method: :native
     end
   end
 
-  r.report "Insert into LinkedList" do 
-    100000.times do 
+  r.report "Find prime numbers using non-optimized while break cycle" do
+    100000.times do
       i = +1 
-      l = LinkedList.new(i, l)
-    end 
-  end
-
-  r.report "Reverse an Array" do
-    100.times do 
-      a.reverse
+      PrimeMulti.list i, method: :non_optimized
     end
   end
 
-  r.report "Reverse a LinkedList" do 
-    100.times do 
-      l.reverse
-    end 
+  r.report "Find prime numbers using optimized while break cycle" do
+    100000.times do
+      i = +1 
+      PrimeMulti.list i, method: :optimized
+    end
   end
 
-  r.report "Convert an Array to a String" do 
-    100.times do 
-      a.join(' -> ')
-    end 
-  end
-
-  r.report "Convert a LinkedList to a String" do 
-    100.times do 
-      l.to_s
-    end 
+  r.report "Find prime numbers using Fiber iterations" do
+    100000.times do
+      i = +1 
+      PrimeMulti.list i, method: :native
+    end
   end
 end
