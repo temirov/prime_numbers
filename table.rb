@@ -1,5 +1,3 @@
-require 'pry'
-
 class Table < Struct.new(:content, :header, :first_row)
   def print
     raise ArgumentError if (header && header.length != content.first.length) || (first_row && first_row.length != content.first.length)
