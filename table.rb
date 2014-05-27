@@ -1,9 +1,11 @@
+require 'pry'
+
 class Table < Struct.new(:content, :header, :first_row)
   def print
     raise ArgumentError if (header && header.length != content.first.length) || (first_row && first_row.length != content.first.length)
 
     if header
-      header.insert 0, "  " if first_row
+      header.insert 0, " " if first_row
       content.insert 0, header
     end
 
@@ -14,20 +16,15 @@ class Table < Struct.new(:content, :header, :first_row)
     end
 
     content.each do |row|
-      puts row.join(' ')
+      puts row.map.with_index{ |e,i| 
+        padding_for_column = e.to_s.length + (padding[i] - e.to_s.length)
+        e.to_s.rjust(padding_for_column) 
+      }.join(' ')
     end
   end
 
   private
-    def columns_width
-      columns_width = []
-      content.each do |first|
-        columns_width << 1
-        content.each do |second|
-          column_width = second.to_s.length
-          columns_width.last = column_width if column_width > columns_width.last
-        end
-      end
-      columns_width
+    def padding
+      content.last.map{ |e| e.to_s.length }
     end
 end
