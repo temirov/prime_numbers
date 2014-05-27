@@ -1,6 +1,5 @@
 require 'prime'
 require_relative 'table'
-# require 'pry'
 
 class PrimeMulti
   class << self
@@ -47,7 +46,6 @@ class PrimeMulti
       prime = Fiber.new do
         loop do
           Fiber.yield candidate if is_prime?(candidate)
-          # We can safely assume that only odd numbers can be primes
           candidate += 1
         end
       end
