@@ -1,7 +1,7 @@
 class Primes
+  extend Enumerable
+
   class << self
-    include Enumerable
-    
     def each
       2.upto Float::INFINITY do |i|
         yield i if is_prime? i
